@@ -1,8 +1,10 @@
 using Warehouse.Application;
+using Warehouse.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers(); 
 builder.Services.AddEndpointsApiExplorer();
