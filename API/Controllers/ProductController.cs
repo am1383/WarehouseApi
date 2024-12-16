@@ -18,14 +18,14 @@ namespace Warehouse.Application.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
-            var products = await _productRepository.GetAllProductsAsync();
+            var products = await _productRepository.GetAll();
             return Ok(products);
         }
 
         [HttpPost]
         public async Task<ActionResult> AddProduct(Product product)
         {
-            await _productRepository.AddProductAsync(product);
+            await _productRepository.Add(product);
             return CreatedAtAction(nameof(GetAllProducts), new { id = product.Id }, product);
         }
     }
