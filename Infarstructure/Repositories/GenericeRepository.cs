@@ -28,7 +28,7 @@ namespace Warehouse.Infarstructure.Repository
             await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
-
+        
         public async Task Update(T entity)
         {
             _context.Update(entity);

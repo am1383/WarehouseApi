@@ -16,7 +16,7 @@ namespace Warehouse.Application.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
+        public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
             var products = await _productRepository.GetAll();
             return Ok(products);
