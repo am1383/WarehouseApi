@@ -1,17 +1,17 @@
-using Warehouse.Infarstructure.Interfaces;
-using Warehouse.Infarstructure.Repositories;
-using Warehouse.Infarstructure.Repository;
-using WarehouseManagement.Models;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(); 
-builder.Services.AddEndpointsApiExplorer(); 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(); 
 
-builder.Services.AddScoped(typeof(IGenericeInterface<>), typeof(GenericRepository<WarehouseI>));
-builder.Services.AddScoped<IWarehouseInterface, WarehouseRepository>();
-builder.Services.AddScoped(typeof(IGenericeInterface<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<IWarehouseInterface, WarehouseRepository>();
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy("CorsPolicy", b =>
+    b.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    );
+});
 
 var app = builder.Build();
 
