@@ -5,7 +5,7 @@ using WarehouseManagement.Models;
 namespace Warehouse.Application.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class InventoryController : ControllerBase
     {
         private readonly IInventoryRepository _inventoryRepository;
@@ -15,6 +15,7 @@ namespace Warehouse.Application.API.Controllers
             _inventoryRepository = inventoryRepository;
         }
 
+        // POST: api/v1/<InventoryController>/register
         [HttpPost("register")]
         public async Task<ActionResult> RegisterInventory(Inventory inventory)
         {
@@ -22,6 +23,7 @@ namespace Warehouse.Application.API.Controllers
             return Ok(inventory);
         }
 
+        // POST: api/v1/<InventoryController>/productId
         [HttpGet("{productId}")]
         public async Task<ActionResult> GetInventoryDetails(int productId)
         {

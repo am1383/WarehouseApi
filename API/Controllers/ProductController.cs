@@ -5,7 +5,7 @@ using WarehouseManagement.Models;
 namespace Warehouse.Application.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -15,6 +15,7 @@ namespace Warehouse.Application.API.Controllers
             _productRepository = productRepository;
         }
 
+        // GET: api/v1/<ProductController>
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
@@ -22,6 +23,7 @@ namespace Warehouse.Application.API.Controllers
             return Ok(products);
         }
 
+        // POST: api/v1/<ProductController>
         [HttpPost]
         public async Task<ActionResult> AddProduct(Product product)
         {
