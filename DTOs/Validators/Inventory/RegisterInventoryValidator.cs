@@ -12,7 +12,7 @@ namespace  Warehouse.Application.DTOs.CreateProduct.Validators
 
             RuleFor(p => p.Quantity).NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull()
-                .GreaterThan(1).WithMessage("{PropertyName} must be at least 1");
+                .GreaterThan(0).WithMessage("{PropertyName} must be at least 1");
         }
     }
 }

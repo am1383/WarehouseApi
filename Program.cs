@@ -1,4 +1,8 @@
+using Warehouse.Application;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureApplicationServices();
 
 builder.Services.AddControllers(); 
 builder.Services.AddEndpointsApiExplorer();
