@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Warehouse.Application.Excecptions;
 using Warehouse.Infarstructure.Interfaces;
 using WarehouseManagement.Data;
 
@@ -18,13 +19,11 @@ namespace Warehouse.Infarstructure.Repository
            return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> Get(int ProductId)
+        public async Task<T> Get(int productId)
         {
-            var product = await _context.Set<T>().FindAsync(ProductId);
-
-            if (product != null) return product;
-
-            throw new KeyNotFoundException($"Product with ID {ProductId} not found.");
+            var product = await FindOrFailAsync(productId);
+            
+            return product;
         }
         
         public async Task Add(T entity)
@@ -41,15 +40,22 @@ namespace Warehouse.Infarstructure.Repository
 
         public async Task Delete(int id)
         {
+            var entity = await FindOrFailAsync(id);
+
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<T> FindOrFailAsync(int id)
+        {
             var entity = await _context.Set<T>().FindAsync(id);
 
             if (entity == null)
             {
-                throw new KeyNotFoundException($"Entity with ID {id} not found.");
+                throw new NotFoundExceptions(id);
             }
 
-            _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Warehouse.Application.Excecptions
         public BadRequestExceptions(string message)
             : base(message)
         {
-            
+            //
         }
     }
 }

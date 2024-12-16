@@ -51,7 +51,7 @@ namespace Warehouse.Application.API.Controllers
             return Ok(new { Message = "Product added to inventory", Transaction = transaction });
         }
 
-        // POST: api/v1/Inventory/remove
+        // DELETE: api/v1/<InventoryController>
         [HttpDelete("remove")]
         public async Task<ActionResult> RemoveInventoryTransaction([FromBody] InventoryTransaction transaction)
         {

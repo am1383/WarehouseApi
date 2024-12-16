@@ -24,8 +24,8 @@ namespace Warehouse.Application.API.Controllers
             return Ok(products);
         }
 
-        // POST: api/v1/<ProductController>/{productId}
-        [HttpPost("{id}")]
+        // GET: api/v1/<ProductController>/{productId}
+        [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int productId)
         {
             var product = await _productRepository.Get(productId);

@@ -22,7 +22,7 @@ namespace Warehouse.Infarstructure.Repository
 
             if (inventoryLog == null)
             {
-                throw new NotFoundExceptions("product", productId);
+                throw new NotFoundExceptions(productId, "product");
             }
 
             return inventoryLog;
