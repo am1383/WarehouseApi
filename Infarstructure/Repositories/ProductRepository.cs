@@ -12,7 +12,5 @@ namespace Warehouse.Infarstructure.Repositories
         {
             _context = context;
         }
-
-        
     }
 }
