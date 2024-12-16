@@ -18,11 +18,15 @@ namespace Warehouse.Infarstructure.Repository
            return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> Get(int id)
+        public async Task<T> Get(int ProductId)
         {
-           return await _context.Set<T>().FindAsync(id);
-        }
+            var product = await _context.Set<T>().FindAsync(ProductId);
 
+            if (product != null)  return product;
+
+            throw new KeyNotFoundException($"Product with ID {ProductId} not found.");
+        }
+        
         public async Task Add(T entity)
         {
             await _context.AddAsync(entity);

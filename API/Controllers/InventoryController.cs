@@ -20,6 +20,7 @@ namespace Warehouse.Application.API.Controllers
         public async Task<ActionResult> RegisterInventory(Inventory inventory)
         {
             await _inventoryRepository.Add(inventory);
+
             return Ok(inventory);
         }
 
@@ -28,6 +29,7 @@ namespace Warehouse.Application.API.Controllers
         public async Task<ActionResult> GetInventoryDetails(int productId)
         {
             var inventories = await _inventoryRepository.GetInventoriesByProductIdAsync(productId);
+
             var balance = await _inventoryRepository.GetProductBalanceAsync(productId);
 
             return Ok(new
@@ -42,17 +44,10 @@ namespace Warehouse.Application.API.Controllers
         [HttpPost]
         public async Task<ActionResult> AddInventoryTransaction([FromBody] InventoryTransaction transaction)
         {
-            if (transaction.Quantity <= 0)
-            {
-                return BadRequest("Quantity must be greater than zero.");
-            }
-
-            if (transaction.OperationType != "IN")
-            {
-                return BadRequest("Invalid operation type. Must be 'IN' for adding inventory.");
-            }
+            await _inventoryRepository.checkValidationAddInventoryTransaction(transaction, "IN");
 
             await _inventoryRepository.AddInventoryTransactionAsync(transaction);
+
             return Ok(new { Message = "Product added to inventory", Transaction = transaction });
         }
 
@@ -60,17 +55,10 @@ namespace Warehouse.Application.API.Controllers
         [HttpDelete("remove")]
         public async Task<ActionResult> RemoveInventoryTransaction([FromBody] InventoryTransaction transaction)
         {
-            if (transaction.Quantity <= 0)
-            {
-                return BadRequest("Quantity must be greater than zero.");
-            }
-
-            if (transaction.OperationType != "OUT")
-            {
-                return BadRequest("Invalid operation type. Must be 'OUT' for removing inventory.");
-            }
+            await _inventoryRepository.checkValidationAddInventoryTransaction(transaction, "OUT");
 
             await _inventoryRepository.AddInventoryTransactionAsync(transaction);
+
             return Ok(new { Message = "Product removed from inventory", Transaction = transaction });
         }
 
@@ -79,6 +67,7 @@ namespace Warehouse.Application.API.Controllers
         public async Task<ActionResult> GetInventoryLogs(int productId)
         {
             var logs = await _inventoryRepository.GetInventoryLogsAsync(productId);
+            
             return Ok(logs);
         }
     }

@@ -20,6 +20,7 @@ namespace Warehouse.Application.API.Controllers
         public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
             var products = await _productRepository.GetAll();
+
             return Ok(products);
         }
 
@@ -28,6 +29,7 @@ namespace Warehouse.Application.API.Controllers
         public async Task<ActionResult<Product>> GetProduct(int productId)
         {
             var product = await _productRepository.Get(productId);
+
             return Ok(product);
         }
 
@@ -36,6 +38,7 @@ namespace Warehouse.Application.API.Controllers
         public async Task<ActionResult> AddProduct(Product product)
         {
             await _productRepository.Add(product);
+
             return CreatedAtAction(nameof(GetAllProducts), new { id = product.Id }, product);
         }
 
@@ -44,14 +47,16 @@ namespace Warehouse.Application.API.Controllers
         public async Task<ActionResult> DeleteProduct(Product product)
         {
             await _productRepository.Delete(product);
+
             return Ok();
         }
 
-        // PUT: api/v1/<ProductController>/{ProductId}
-        [HttpPut("{id}")]
+        // PUT: api/v1/<ProductController>
+        [HttpPut]
         public async Task<ActionResult> UpdateProduct(Product product)
         {
             await _productRepository.Update(product);
+
             return Ok();
         }
     }
