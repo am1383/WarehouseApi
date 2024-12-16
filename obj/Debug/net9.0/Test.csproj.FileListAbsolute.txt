@@ -36,3 +36,4 @@
 /home/amir/Desktop/Test/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/amir/Desktop/Test/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/amir/Desktop/Test/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/amir/Desktop/Test/bin/Debug/net9.0/FluentValidation.dll

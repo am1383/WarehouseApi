@@ -22,7 +22,7 @@ namespace Warehouse.Infarstructure.Repository
         {
             var product = await _context.Set<T>().FindAsync(ProductId);
 
-            if (product != null)  return product;
+            if (product != null) return product;
 
             throw new KeyNotFoundException($"Product with ID {ProductId} not found.");
         }
@@ -39,8 +39,15 @@ namespace Warehouse.Infarstructure.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(T entity)
+        public async Task Delete(int id)
         {
+            var entity = await _context.Set<T>().FindAsync(id);
+
+            if (entity == null)
+            {
+                throw new KeyNotFoundException($"Entity with ID {id} not found.");
+            }
+
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }

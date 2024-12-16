@@ -2,6 +2,7 @@ using Warehouse.Infarstructure.Interfaces;
 using WarehouseManagement.Data;
 using WarehouseManagement.Models;
 using Microsoft.EntityFrameworkCore;
+using Warehouse.Application.Excecptions;
 
 namespace Warehouse.Infarstructure.Repository
 {
@@ -21,7 +22,7 @@ namespace Warehouse.Infarstructure.Repository
 
             if (inventoryLog == null)
             {
-                throw new KeyNotFoundException($"InventoryLog for product ID {productId} not found.");
+                throw new NotFoundExceptions("product", productId);
             }
 
             return inventoryLog;
