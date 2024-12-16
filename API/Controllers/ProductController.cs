@@ -39,14 +39,14 @@ namespace Warehouse.Application.API.Controllers
         {
             await _productRepository.Add(product);
 
-            return CreatedAtAction(nameof(GetAllProducts), new { id = product.Id }, product);
+            return Ok();
         }
 
         // DELETE: api/v1/<ProductController>/{ProductId}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteProduct(Product product)
+        public async Task<ActionResult> DeleteProduct(int productId)
         {
-            await _productRepository.Delete(product);
+            await _productRepository.Delete(productId);
 
             return Ok();
         }
