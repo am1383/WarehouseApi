@@ -1,4 +1,3 @@
-using Warehouse.Infarstructure.Interfaces;
 using WarehouseManagement.Data;
 using WarehouseManagement.Models;
 

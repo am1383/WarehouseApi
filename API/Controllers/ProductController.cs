@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Warehouse.Infarstructure.Interfaces;
-using WarehouseManagement.Models;
 
 namespace Warehouse.Application.API.Controllers
 {
@@ -9,6 +7,6 @@ namespace Warehouse.Application.API.Controllers
 
     class ProductController : ControllerBase
     {
-        
+
     }
 }
