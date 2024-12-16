@@ -8,7 +8,6 @@ namespace WarehouseManagement.Models
         public Product Product { get; set; } 
         public int Quantity { get; set; } 
         public string OperationType { get; set; } 
-        public string Reason { get; set; } 
         public DateTime OperationDate { get; set; } 
     }
 }

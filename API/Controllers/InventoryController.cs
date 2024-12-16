@@ -23,7 +23,7 @@ namespace Warehouse.Application.API.Controllers
             return Ok(inventory);
         }
 
-        // POST: api/v1/<InventoryController>/productId
+        // GET: api/v1/<InventoryController>/{productId}
         [HttpGet("{productId}")]
         public async Task<ActionResult> GetInventoryDetails(int productId)
         {
@@ -36,6 +36,50 @@ namespace Warehouse.Application.API.Controllers
                 Balance = balance,
                 Details = inventories
             });
+        }
+
+        // POST: api/v1/<InventoryController>
+        [HttpPost]
+        public async Task<ActionResult> AddInventoryTransaction([FromBody] InventoryTransaction transaction)
+        {
+            if (transaction.Quantity <= 0)
+            {
+                return BadRequest("Quantity must be greater than zero.");
+            }
+
+            if (transaction.OperationType != "IN")
+            {
+                return BadRequest("Invalid operation type. Must be 'IN' for adding inventory.");
+            }
+
+            await _inventoryRepository.AddInventoryTransactionAsync(transaction);
+            return Ok(new { Message = "Product added to inventory", Transaction = transaction });
+        }
+
+        // POST: api/v1/Inventory/remove
+        [HttpDelete("remove")]
+        public async Task<ActionResult> RemoveInventoryTransaction([FromBody] InventoryTransaction transaction)
+        {
+            if (transaction.Quantity <= 0)
+            {
+                return BadRequest("Quantity must be greater than zero.");
+            }
+
+            if (transaction.OperationType != "OUT")
+            {
+                return BadRequest("Invalid operation type. Must be 'OUT' for removing inventory.");
+            }
+
+            await _inventoryRepository.AddInventoryTransactionAsync(transaction);
+            return Ok(new { Message = "Product removed from inventory", Transaction = transaction });
+        }
+
+        // GET: api/v1/Inventory/{productId}/logs
+        [HttpGet("{productId}/logs")]
+        public async Task<ActionResult> GetInventoryLogs(int productId)
+        {
+            var logs = await _inventoryRepository.GetInventoryLogsAsync(productId);
+            return Ok(logs);
         }
     }
 }
