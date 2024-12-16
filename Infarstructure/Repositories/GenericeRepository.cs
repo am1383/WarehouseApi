@@ -41,7 +41,7 @@ namespace Warehouse.Infarstructure.Repository
         public async Task Delete(int id)
         {
             var entity = await FindOrFailAsync(id);
- if (entity == null)
+            if (entity == null)
             {
                 throw new NotFoundExceptions(id);
             }

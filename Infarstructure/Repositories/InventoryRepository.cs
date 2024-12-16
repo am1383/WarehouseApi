@@ -4,7 +4,6 @@ using Warehouse.Infarstructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Infarstructure.Repository;
 using Warehouse.Application.Excecptions;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Warehouse.Infarstructure.Repositories
 {
@@ -25,29 +24,24 @@ namespace Warehouse.Infarstructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task calcTotalInInventory(int productId)
+        public async Task<int> CalcTotalInInventory(int productId)
         {
-            var totalIn = await _context.InventoryLogs
+            return await _context.InventoryLogs
                 .Where(i => i.ProductId == productId && i.OperationType == "IN")
                 .SumAsync(i => i.Quantity);
-
-            return totalIn;
         }
 
-        public async Task calcTotalOutInventory(int productId)
+        public async Task<int> CalcTotalOutInventory(int productId)
         {
-            var totalOut = await _context.InventoryLogs
+            return await _context.InventoryLogs
                 .Where(i => i.ProductId == productId && i.OperationType == "OUT")
                 .SumAsync(i => i.Quantity);
-
-            return totalOut;
         }
 
         public async Task<int> GetProductBalanceAsync(int productId)
         {
-            var totalIn = await calcTotalInInventory(productId);
-
-            var totalOut = await calcTotalOutInventory(productId);
+            var totalIn = await CalcTotalInInventory(productId);
+            var totalOut = await CalcTotalOutInventory(productId);
 
             return totalIn - totalOut;
         }
@@ -108,7 +102,7 @@ namespace Warehouse.Infarstructure.Repositories
         {
             if (transaction.Quantity <= 0) throw new BadRequestExceptions("Quantity must be greater than zero.");
 
-            if (transaction.OperationType != OperationType) throw new BadRequestExceptions("Invalid operation type. Must be 'IN' for adding inventory.");
+            if (transaction.OperationType != OperationType) throw new BadRequestExceptions("Invalid operation type.");
 
             return Task.CompletedTask;         
         }
