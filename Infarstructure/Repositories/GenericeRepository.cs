@@ -4,7 +4,7 @@ using WarehouseManagement.Data;
 
 namespace Warehouse.Infarstructure.Repository
 {
-    public class GenericRepository<T> : IGenericeInterface<T> where T : class
+    public class GenericRepository<T> : IGenericeRepository<T> where T : class
     {
         private readonly WarehouseDbContext _context;
 
