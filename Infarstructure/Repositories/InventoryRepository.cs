@@ -3,8 +3,6 @@ using WarehouseManagement.Models;
 using Warehouse.Infarstructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Infarstructure.Repository;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.OpenApi.Models;
 
 namespace Warehouse.Infarstructure.Repositories
 {
@@ -40,15 +38,15 @@ namespace Warehouse.Infarstructure.Repositories
 
         public async Task<Inventory> GetInventoryAsync(int productId)
         {
-            return await _context.Inventories
+            var inventory = await _context.Inventories
                 .FirstOrDefaultAsync(i => i.ProductId == productId);
-        }
 
-        public async Task<List<InventoryLog>> GetInventoryLogsAsync(int productId)
-        {
-            return await _context.InventoryLogs
-                .Where(log => log.ProductId == productId)
-                .ToListAsync();
+            if (inventory == null)
+            {
+                 throw new KeyNotFoundException($"Inventory for product ID {productId} not found.");
+            }
+
+            return inventory;   
         }
 
         public async Task AddInventoryTransactionAsync(InventoryTransaction transaction)

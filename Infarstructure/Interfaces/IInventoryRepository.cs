@@ -10,8 +10,6 @@ namespace Warehouse.Infarstructure.Interfaces
 
         Task<Inventory> GetInventoryAsync(int productId);
 
-        Task<List<InventoryLog>> GetInventoryLogsAsync(int productId);
-
         Task AddInventoryTransactionAsync(InventoryTransaction transaction);
 
         Task UpdateInventoryAsync(int productId, int quantityChange);
