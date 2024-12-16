@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OKXbnwsYQAw=",
+  "dgSpecHash": "NGTxMoaJcW8=",
   "success": true,
   "projectFilePath": "/home/amir/Desktop/Test/Test.csproj",
   "expectedPackageFiles": [
+    "/home/amir/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
     "/home/amir/.nuget/packages/microsoft.aspnetcore.openapi/9.0.0/microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
     "/home/amir/.nuget/packages/microsoft.entityframeworkcore/9.0.0/microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
     "/home/amir/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.0/microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",

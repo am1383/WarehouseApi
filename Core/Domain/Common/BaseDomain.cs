@@ -1,6 +1,6 @@
 namespace Warehouse.Domain
 {
-    public class BaseDomain
+    public class BaseDomainEntity
     {
         public int Id { get; set; }
     }
