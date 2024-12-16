@@ -61,14 +61,5 @@ namespace Warehouse.Application.API.Controllers
 
             return Ok(new { Message = "Product removed from inventory", Transaction = transaction });
         }
-
-        // GET: api/v1/Inventory/{productId}/logs
-        [HttpGet("{productId}/logs")]
-        public async Task<ActionResult> GetInventoryLogs(int productId)
-        {
-            var logs = await _inventoryRepository.GetInventoryLogsAsync(productId);
-            
-            return Ok(logs);
-        }
     }
 }
