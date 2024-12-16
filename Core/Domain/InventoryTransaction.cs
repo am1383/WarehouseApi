@@ -1,6 +1,8 @@
+using Warehouse.Domain;
+
 namespace WarehouseManagement.Models
 {
-    public class InventoryTransaction
+    public class InventoryTransaction : BaseDomainEntity
     {
         public int ProductId { get; set; }
         public int Quantity { get; set; }
