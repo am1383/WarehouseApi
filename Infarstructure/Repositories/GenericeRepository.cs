@@ -19,7 +19,7 @@ namespace Warehouse.Infarstructure.Repository
            return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> Get(int productId)
+        public async Task<T?> Get(int productId)
         {
             var product = await FindOrFailAsync(productId);
             
@@ -41,19 +41,17 @@ namespace Warehouse.Infarstructure.Repository
         public async Task Delete(int id)
         {
             var entity = await FindOrFailAsync(id);
-
+ if (entity == null)
+            {
+                throw new NotFoundExceptions(id);
+            }
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<T> FindOrFailAsync(int id)
+        public async Task<T?> FindOrFailAsync(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id);
-
-            if (entity == null)
-            {
-                throw new NotFoundExceptions(id);
-            }
 
             return entity;
         }
