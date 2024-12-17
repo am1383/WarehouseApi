@@ -40,6 +40,15 @@ namespace Warehouse.Application.API.Controllers
             });
         }
 
+        // GET : api/v1/<InventoryController>
+        [HttpGet]
+        public async Task<ActionResult> GetAllInventory()
+        {
+            var inventory = await _inventoryRepository.GetAll();
+
+            return Ok(inventory);
+        }
+
         // PUT: api/v1/<InventoryController>
         [HttpPut]
         public async Task<ActionResult> UpdateInventoryDetails([FromBody] Inventory inventory)

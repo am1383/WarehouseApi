@@ -4,6 +4,6 @@ namespace Warehouse.Infarstructure.Interfaces
 {
     public interface IInventoryLogRepository 
     {
-        Task<InventoryLog> GetInventoryLogsAsync(int productId);
+        Task<int> GetInventoryLogsAsync(int productId);
     }
 } 

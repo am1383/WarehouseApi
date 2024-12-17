@@ -24,26 +24,11 @@ namespace Warehouse.Infarstructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<int> CalcTotalInInventory(int productId)
-        {
-            return await _context.InventoryLogs
-                .Where(i => i.ProductId == productId && i.OperationType == "IN")
-                .SumAsync(i => i.Quantity);
-        }
-
-        public async Task<int> CalcTotalOutInventory(int productId)
-        {
-            return await _context.InventoryLogs
-                .Where(i => i.ProductId == productId && i.OperationType == "OUT")
-                .SumAsync(i => i.Quantity);
-        }
-
         public async Task<int> GetProductBalanceAsync(int productId)
         {
-            var totalIn = await CalcTotalInInventory(productId);
-            var totalOut = await CalcTotalOutInventory(productId);
-
-            return totalIn - totalOut;
+            return await _context.Inventories
+                .Where(i => i.ProductId == productId)
+                .SumAsync(i => i.Quantity);
         }
 
         public async Task<Inventory> GetInventoryAsync(int productId)

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using Warehouse.Infarstructure.Interfaces;
 
 namespace Warehouse.Application.API.Controllers
@@ -20,7 +21,10 @@ namespace Warehouse.Application.API.Controllers
         {
             var logs = await _inventoryLogRepository.GetInventoryLogsAsync(productId);
             
-            return Ok(logs);
+            return Ok(new {
+                productId,
+                logs
+            });
         }
     }
 }
