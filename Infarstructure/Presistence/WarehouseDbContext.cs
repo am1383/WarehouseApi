@@ -12,10 +12,10 @@ namespace WarehouseManagement.Data
 
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Inventory> Inventories { get; set; }
-        public DbSet<InventoryLog> InventoryLogs { get; set; }
-        public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
+        public required DbSet<Product> Products { get; set; }
+        public required DbSet<Inventory> Inventories { get; set; }
+        public required DbSet<InventoryLog> InventoryLogs { get; set; }
+        public required DbSet<InventoryTransaction> InventoryTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
