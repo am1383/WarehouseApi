@@ -1,9 +1,10 @@
 using FluentValidation;
+using Warehouse.Application.DTOs.Product;
 using WarehouseManagement.Models;
 
 namespace  Warehouse.Application.DTOs.CreateProduct.Validators
 {
-    public class UpdateProductValidator : AbstractValidator<Product>
+    public class UpdateProductValidator : AbstractValidator<CreateProductDTO>
     {
         public UpdateProductValidator()
         {

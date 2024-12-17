@@ -1,9 +1,10 @@
 using FluentValidation;
-using WarehouseManagement.Models;
+using Warehouse.Application.DTOs.Inventory;
+using Warehouse.Application.DTOs.Product;
 
-namespace  Warehouse.Application.DTOs.CreateProduct.Validators
+namespace Warehouse.Application.DTOs.CreateProduct.Validators
 {
-    public class RegisterInventoryValidator : AbstractValidator<Inventory>
+    public class RegisterInventoryValidator : AbstractValidator<RegisterInventoryDTO>
     {
         public RegisterInventoryValidator()
         {
