@@ -60,11 +60,11 @@ namespace Warehouse.Application.API.Controllers
 
         // DELETE: api/v1/<InventoryController>/{ProductId}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> RemoveInventoryTransaction([FromBody] InventoryTransaction transaction)
+        public async Task<ActionResult> RemoveInventoryTransaction([FromBody] InventoryTransaction transaction, int productId)
         {
-            await _inventoryRepository.checkValidationAddInventoryTransaction(transaction, "OUT");
-
             await _inventoryRepository.AddInventoryTransactionAsync(transaction);
+
+            await _inventoryRepository.Delete(productId);
 
             return Ok(new { Message = "Product removed from inventory", Transaction = transaction });
         }
