@@ -15,8 +15,8 @@ namespace Warehouse.Application.API.Controllers
             _inventoryRepository = inventoryRepository;
         }
 
-        // POST: api/v1/<InventoryController>/register
-        [HttpPost("register")]
+        // POST: api/v1/<InventoryController>
+        [HttpPost]
         public async Task<ActionResult> RegisterInventory(Inventory inventory)
         {
             await _inventoryRepository.Add(inventory);
@@ -40,19 +40,17 @@ namespace Warehouse.Application.API.Controllers
             });
         }
 
-        // POST: api/v1/<InventoryController>
-        [HttpPost]
-        public async Task<ActionResult> AddInventoryTransaction([FromBody] InventoryTransaction transaction)
+        // PUT: api/v1/<InventoryController>
+        [HttpPut]
+        public async Task<ActionResult> UpdateInventoryDetails([FromBody] Inventory inventory)
         {
-            await _inventoryRepository.checkValidationAddInventoryTransaction(transaction, "IN");
+            await _inventoryRepository.Update(inventory);
 
-            await _inventoryRepository.AddInventoryTransactionAsync(transaction);
-
-            return Ok(new { Message = "Product added to inventory", Transaction = transaction });
+            return Ok();
         }
 
-        // DELETE: api/v1/<InventoryController>
-        [HttpDelete("remove")]
+        // DELETE: api/v1/<InventoryController>/{ProductId}
+        [HttpDelete("{id}")]
         public async Task<ActionResult> RemoveInventoryTransaction([FromBody] InventoryTransaction transaction)
         {
             await _inventoryRepository.checkValidationAddInventoryTransaction(transaction, "OUT");
